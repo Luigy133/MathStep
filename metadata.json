@@ -1,0 +1,6 @@
+{
+  "name": "MathStep",
+  "description": "Plataforma educativa de matemáticas basada en el método paso a paso.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

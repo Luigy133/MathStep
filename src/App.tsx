@@ -1,61 +1,32 @@
-import { useState } from 'react';
-
-/**
- * MathStep - Plataforma Educativa
- * Versión React + Tailwind
- */
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import MainView from './components/MainView';
+import HomePage from './pages/HomePage';
+import CategoryPage from './pages/CategoryPage';
+import TemaPage from './pages/TemaPage';
+import ArithmeticPage from './pages/ArithmeticPage';
+import PracticaTemplate from './pages/PracticaTemplate';
+import SubIndiceCombinados from './pages/SubIndiceCombinados';
+import ConfiguracionPage from './pages/ConfiguracionPage';
+import ProgresoPage from './pages/ProgresoPage';
+import PerfilPage from './pages/PerfilPage';
+import BrandIntro from './components/BrandIntro';
 
 export default function App() {
-  // 'nivel' es nuestra variable de memoria. Inicia en 'inicio' (sin seleccionar)
-  const [nivel, setNivel] = useState('inicio');
-
-  // --- Pantalla de Bienvenida (Selector) ---
-  if (nivel === 'inicio') {
-    return (
-      <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-6">
-        <h1 className="text-5xl font-extrabold text-slate-800 mb-4">Bienvenidos a MathStep</h1>
-        <p className="text-xl text-slate-600 mb-12">Elige tu camino para comenzar:</p>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
-          <button 
-            onClick={() => setNivel('kids')}
-            className="p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl border-b-6 border-blue-500 transition-all text-center"
-          >
-            <div className="text-6xl mb-4">🎈</div>
-            <h2 className="text-2xl font-bold text-blue-800">Matemáticas-Kids</h2>
-            <p className="text-slate-600 mt-2">Primaria: Aprende jugando.</p>
-          </button>
-          
-          <button 
-            onClick={() => setNivel('juniors')}
-            className="p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl border-b-6 border-purple-500 transition-all text-center"
-          >
-            <div className="text-6xl mb-4">🚀</div>
-            <h2 className="text-2xl font-bold text-purple-800">Matemáticas-Juniors</h2>
-            <p className="text-slate-600 mt-2">Secundaria/Bachillerato: Refuerzo y método.</p>
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  // --- Pantalla según el nivel elegido ---
   return (
-    <div className="min-h-screen bg-slate-50 p-6">
-      <button 
-        onClick={() => setNivel('inicio')}
-        className="mb-6 text-blue-600 hover:underline"
-      >
-        ← Volver al inicio
-      </button>
-
-      {nivel === 'kids' ? (
-        <h1 className="text-4xl font-bold text-blue-800">Bienvenido a Matemáticas-Kids</h1>
-      ) : (
-        <h1 className="text-4xl font-bold text-purple-800">Bienvenido a Matemáticas-Juniors</h1>
-      )}
-      
-      {/* Aquí construiremos el contenido de cada sección después */}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainView />} />
+        <Route path="/temas" element={<HomePage />} />
+        <Route path="/temas/:categoria" element={<CategoryPage />} />
+        <Route path="/temas/:categoria/:subtema" element={<TemaPage />} />
+        <Route path="/temas/:categoria/:subtema/practica" element={<PracticaTemplate />} />
+        <Route path="/temas/aritmetica" element={<ArithmeticPage />} />
+        <Route path="/temas/aritmetica/ejercicios-combinados" element={<SubIndiceCombinados />} />
+        <Route path="/configuracion" element={<ConfiguracionPage />} />
+        <Route path="/progreso" element={<ProgresoPage />} />
+        <Route path="/perfil" element={<PerfilPage />} />
+        <Route path="/test-intro" element={<BrandIntro />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
